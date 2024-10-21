@@ -13,5 +13,6 @@ Route::get('/user', function (Request $request) {
 Route::get('/getAll', [ProductsController::class, 'getAll']);
 Route::post('/getStoreProducts', [ProductsController::class, 'getStoreProducts']);
 Route::post('/insertStoreProduct', [ProductsController::class, 'insertStoreProduct']);
+Route::post('/deleteStoreProduct', [ProductsController::class, 'deleteStoreProduct']);
 // SUPPLIERS
 Route::get('/getStoreSuppliers', [SuppliersController::class, 'getStoreSuppliers']);

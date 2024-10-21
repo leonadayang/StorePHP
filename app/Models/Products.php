@@ -20,7 +20,8 @@ class Products extends Model
         'sCode',
     ];
 
-    public static function getAllProducts() {
+    public static function getAllProducts()
+    {
         return Products::all();
     }
 
@@ -28,7 +29,7 @@ class Products extends Model
     {
         switch ($productType) {
             case '1':
-                $selectedProducts = Products::orderBy('pCode', 'asc')->get();
+                $selectedProducts = Products::orderBy('pPrice', 'asc')->get();
                 break;
             case '2':
                 $selectedProducts = Products::where('pType', 'Snacks')->get();
@@ -60,6 +61,24 @@ class Products extends Model
                 'pPrice' => $pPrice,
                 'sCode' => $sCode,
             ]);
+        }
+    }
+
+    public static function deleteProduct($pCode, $pName, $pType, $sCode)
+    {
+        $checkExisting =
+            Products::where('pName', $pName)
+            ->where('pType', $pType)
+            ->exists();
+
+        if ($checkExisting) {
+            return Products::where('pCode', $pCode)
+                ->where('pName', $pName)
+                ->where('pType', $pType)
+                ->where('sCode', $sCode)
+                ->delete();
+        } else {
+            return "missing";
         }
     }
 }

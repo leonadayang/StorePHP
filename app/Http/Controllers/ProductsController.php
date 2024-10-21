@@ -29,4 +29,14 @@ class ProductsController extends Controller
         $productInsert = Products::insertNewProduct($pName, $pType, $pQuantity, $pPrice, $sCode);
         return response()->json($productInsert);
     }
+
+    public function deleteStoreProduct(Request $request) {
+        $pCode = $request->input('pCode');
+        $pName = $request->input('pName');
+        $pType = $request->input('pType');
+        $sCode = $request->input('sCode');
+
+        $productDelete = Products::deleteProduct($pCode, $pName, $pType, $sCode);
+        return response()->json($productDelete);
+    }
 }
